@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>portalDocument</title>
+    </head>
+
+    <body>
+        <h1>All Portal Documents</h1>
+        <div>
+            <a href="/portalDocuments/new">Add A New Portal</a>
+        </div>
+        <ul>
+            <% for (let portalDocument of portalDocuments) {%>
+                <!-- Make each portalDocument a link to the show page -->
+                <li><a href="/portalDocuments/<%= portalDocument._id %>">
+                        <%= portalDocument.title %>
+                    </a>
+
+                </li>
+                <%} %>
+        </ul>
+    </body>
+
+</html>

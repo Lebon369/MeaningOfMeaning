@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Portal Document</title>
+    </head>
+
+    <body>
+        <h1>Edit Portal Documents</h1>
+        <form action="/portalDocuments/<%=portalDocument._id%>?_method=PUT" method="POST">
+            <dir>
+                <label for="title">Title</label>
+                <input type="text" name="portalDocument[title]" id="title" value="<%= portalDocument.title %> ">
+            </dir>
+            <dir>
+                <label for="author">Author</label>
+                <input type="text" name="portalDocument[author]" id="author" value="<%= portalDocument.author  %> ">
+            </dir>
+            <button>Update Portal Document</button>
+
+        </form>
+        <a href="/portalDocuments/<%= portalDocument._id %> ">Back To The Portal</a>
+    </body>
+
+</html>

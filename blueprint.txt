@@ -1,0 +1,23 @@
+portal: 
+	A post about something, it is a portal to the past. You can also call it an archive
+
+STEPS:
+
+1. Creating the basic Express App
+	1.1 Establishing the connection
+	2.1 Creating and set the view engine as well as views directory and home.ejs file 
+2. Creating the portal model basics
+	2.1 Creating models directory and portal.js
+3. Seeding portals
+4. Portal index
+5. Portal show
+	5.1 create the show page
+	5.2 Make each portalDocument from index.ejs a link to the show.ejs page by usind unique _id
+6. Portal NEW and CREATE
+	6.1 Creating the form that create and add a new portal document
+	6.1.1 Creating the 'NEW' form as a GET request
+	6.1.2 Creating the 'CREATE' route as a POST request
+7. portal EDIT and UPDATE
+	7.1 Using method-override to update a portal document
+8. Portal DELETE
+	8.1 Using method-override to delete a portal document

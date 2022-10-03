@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Portal Document</title>
+    </head>
+
+    <body>
+        <form action="/portalDocuments" method="POST">
+            <dir>
+                <label for="title">Title</label>
+                <input type="text" name="portalDocument[title]" id="title">
+            </dir>
+            <dir>
+                <label for="author">Author</label>
+                <input type="text" name="portalDocument[author]" id="author">
+            </dir>
+            <button>Add Portal Document</button>
+
+        </form>
+        <a href="/portalDocuments">All Portals</a>
+    </body>
+
+</html>
