@@ -1,7 +1,8 @@
 portal: 
 	A post about something, it is a portal to the past. You can also call it an archive
 
-STEPS:
+PART ONE
+--------
 
 1. Creating the basic Express App
 	1.1 Establishing the connection
@@ -21,3 +22,14 @@ STEPS:
 	7.1 Using method-override to update a portal document
 8. Portal DELETE
 	8.1 Using method-override to delete a portal document
+
+	PART TWO
+	--------
+9. Installing MORGAN for looging information the incoming html requests
+10. Installing and Using ejs-mate for styling
+	10.1 Creating a boilerplate.ejs to centralize styling form all other .ejs files
+11. Creating Navigation bar(Navbar.ejs) partial
+12. Creating footer bar(footer.ejs) partial
+13. Adding images
+14. Styling portal document index
+15. Styling the 'NEW' form

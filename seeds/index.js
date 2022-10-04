@@ -24,11 +24,12 @@ const seedDB = async () => {
         portalDocument.title = book.title;
         portalDocument.author = book.author;
         portalDocument.year = book.year;
-        portalDocument.imageLink = book.imageLink;
         portalDocument.country = book.country;
         portalDocument.language = book.language;
         portalDocument.pages = book.pages;
-        portalDocument.link = book.link;
+
+        // setting up image generator from source.unsplash.com
+        portalDocument.imageLink = 'https://source.unsplash.com/collection/1971015';
 
         await portalDocument.save();
     }

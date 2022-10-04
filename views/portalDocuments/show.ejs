@@ -1,32 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate')%>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Show</title>
-    </head>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card mb-3">
+                <img src="<%= portalDocument.imageLink%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= portalDocument.title%>
+                    </h5>
 
-    <body>
-        <h1>
-            <%= portalDocument.title %>
-        </h1>
-        <h3>By</h3>
-        <h2>
-            <%= portalDocument.author %>
-        </h2>
-        <p><a href="/portalDocuments/<%= portalDocument._id %>/edit ">Edit</a></p>
-        <p>
-        <form action="/portalDocuments/<%=portalDocument._id%>?_method=DELETE" method="POST">
-            <button>Delete</button>
-        </form>
+                </div>
 
-        </p>
-        <footer>
-            <a href="/portalDocuments">All Portals</a>
-        </footer>
+                <ul class="list-group list-group-flush">
 
-    </body>
-
-</html>
+                    <li class="list-group-item text-muted">
+                        <small class="text-muted">by:</small>
+                        <%= portalDocument.author%>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <a class="card-link btn btn-info" href="/portalDocuments/<%=portalDocument._id%>/edit">Edit</a>
+                    <form class="d-inline" action="/portalDocuments/<%=portalDocument._id%>?_method=DELETE"
+                        method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    3 days ago
+                </div>
+            </div>
+        </div>
+    </div>

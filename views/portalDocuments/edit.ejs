@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">Edit Portal Document</h1>
+        <div class="col-6 offset-3">
+            <form action="/portalDocuments/<%=portalDocument._id%>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="portalDocument[title]"
+                        value="<%=portalDocument.title %>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="author">Author</label>
+                    <input class="form-control" type="text" id="author" name="portalDocument[author]"
+                        value="<%=portalDocument.author %>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image Url</label>
+                    <input class="form-control" type="text" id="image" name="portalDocument[imageLink]"
+                        value="<%=portalDocument.imageLink %>">
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Portal Document</button>
+                </div>
+            </form>
+            <a href="/portalDocuments/<%= portalDocument._id%>">Back To Portal Documents</a>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit Portal Document</title>
-    </head>
-
-    <body>
-        <h1>Edit Portal Documents</h1>
-        <form action="/portalDocuments/<%=portalDocument._id%>?_method=PUT" method="POST">
-            <dir>
-                <label for="title">Title</label>
-                <input type="text" name="portalDocument[title]" id="title" value="<%= portalDocument.title %> ">
-            </dir>
-            <dir>
-                <label for="author">Author</label>
-                <input type="text" name="portalDocument[author]" id="author" value="<%= portalDocument.author  %> ">
-            </dir>
-            <button>Update Portal Document</button>
-
-        </form>
-        <a href="/portalDocuments/<%= portalDocument._id %> ">Back To The Portal</a>
-    </body>
-
-</html>
+        </div>
+    </div>

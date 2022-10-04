@@ -1,28 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
+    <h1>All Portal Documents</h1>
+    <div>
+        <a href="/portalDocuments/new">Add A New Portal</a>
+    </div>
+    <ul>
+        <% for (let portalDocument of portalDocuments) {%>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>portalDocument</title>
-    </head>
+            <!-- Make each portalDocument a link to the show page -->
 
-    <body>
-        <h1>All Portal Documents</h1>
-        <div>
-            <a href="/portalDocuments/new">Add A New Portal</a>
-        </div>
-        <ul>
-            <% for (let portalDocument of portalDocuments) {%>
-                <!-- Make each portalDocument a link to the show page -->
-                <li><a href="/portalDocuments/<%= portalDocument._id %>">
-                        <%= portalDocument.title %>
-                    </a>
+            <div class="card" mb-3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" alt="" src="<%=portalDocument.imageLink%>">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= portalDocument.title %>
+                            </h5>
+                            <h6 class="card-text">
+                                <small class="text-muted">
+                                    by
+                                </small>
+                            </h6>
 
-                </li>
-                <%} %>
-        </ul>
-    </body>
-
-</html>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= portalDocument.author%> (author)
+                                </small>
+                            </p>
+                            <a class="btn btn-primary" href="/portalDocuments/<%=portalDocument._id%>">View
+                                <%=portalDocument.title%>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%} %>
+    </ul>

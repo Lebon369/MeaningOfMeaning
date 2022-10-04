@@ -1,6 +1,7 @@
 // imports
 const express = require('express');
 const { default: mongoose } = require('mongoose');
+const ejsMate = require('ejs-mate');
 const pathFinder = require('path');
 const PortalModel = require('./models/portalModel'); // For handling PUT, PATCH and DELETE routes
 const methodOverride = require('method-override');
@@ -16,7 +17,7 @@ db.once("open", () => {
 
 const app = express();
 
-
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', pathFinder.join(__dirname, 'views'));
 
