@@ -2,18 +2,26 @@
     <div class="row">
         <h1 class="text-center">New Portal Document</h1>
         <div class="col-6 offset-3">
-            <form action="/portalDocuments" method="POST">
+            <form action="/portalDocuments" method="POST" novalidate class="needsValidation">
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
-                    <input class="form-control" type="text" id="title" name="portalDocument[title]">
+                    <input class="form-control" type="text" id="title" name="portalDocument[title]" required>
+                    <div class="valid-feedback">Looks great!</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="author">Author</label>
-                    <input class="form-control" type="text" id="author" name="portalDocument[author]">
+                    <input class="form-control" type="text" id="author" name="portalDocument[author]" required>
+                    <div class="valid-feedback">Looks great!</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="year">Year Written</label>
+                    <input class="form-control" type="number" id="year" name="portalDocument[year]" required>
+                    <div class="valid-feedback">Looks great!</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">Image Url</label>
-                    <input class="form-control" type="text" id="image" name="portalDocument[imageLink]">
+                    <input class="form-control" type="text" id="image" name="portalDocument[imageLink]" required>
+                    <div class="valid-feedback">Looks great!</div>
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-success">Add Portal Document </button>

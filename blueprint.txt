@@ -1,7 +1,7 @@
 portal: 
 	A post about something, it is a portal to the past. You can also call it an archive
 
-PART ONE
+PART ONE: SETTING UP CRUD OPERATIONS
 --------
 
 1. Creating the basic Express App
@@ -23,7 +23,7 @@ PART ONE
 8. Portal DELETE
 	8.1 Using method-override to delete a portal document
 
-	PART TWO
+	PART TWO: BASIC STYLES
 	--------
 9. Installing MORGAN for looging information the incoming html requests
 10. Installing and Using ejs-mate for styling
@@ -33,3 +33,11 @@ PART ONE
 13. Adding images
 14. Styling portal document index
 15. Styling the 'NEW' form
+
+	PART THREE : ERRORS HANDLING & DATA VALIDATION
+	----------
+16. Client-side validation
+17. catchAsyncError function 
+18. expreeError class
+19. error rendering(error.ejs)
+20. Server-side validation with Joi
