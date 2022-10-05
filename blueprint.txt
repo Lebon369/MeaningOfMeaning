@@ -41,3 +41,13 @@ PART ONE: SETTING UP CRUD OPERATIONS
 18. expreeError class
 19. error rendering(error.ejs)
 20. Server-side validation with Joi
+
+	PART FOUR: ADDING THE REVIEW MODEL
+	----------
+21. Defining the review model
+22. Creating a one to one relationship between portal model to review model
+23. Posting a review in app.js
+24. Client-side review validation
+25. Displaying reviews
+26. Deleting reviews
+27. DELETE Middleware for a whole portal document and its dependencies

@@ -7,7 +7,9 @@ const PortalModel = require('./models/portalModel'); // For handling PUT, PATCH 
 const methodOverride = require('method-override');
 const catchAsyncError = require('./utils/catchAsyncError');
 const ExpressError = require('./utils/expressError');
-const { portalDocumentJoiSchema } = require('./joiSchemas')
+const ReviewModel = require('./models/reviewModel')
+const { portalDocumentJoiSchema, reviewJoiSchema } = require('./joiSchemas')
+
 
 mongoose.connect('mongodb://localhost:27017/meaning-of-meaning');
 
@@ -27,7 +29,7 @@ app.set('views', pathFinder.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-// creating validation for portal documents with Joi
+// Creating validation for portal documents with Joi
 const validatePortalDocument = (req, res, next) => {
     const { error } = portalDocumentJoiSchema.validate(req.body);
     if (error) {
@@ -38,6 +40,16 @@ const validatePortalDocument = (req, res, next) => {
     }
 }
 
+// Creating validation for reviews
+const validateReview = (req, res, next) => {
+    const { error } = reviewJoiSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
 
 // get and respond to the requests from the homepage
 app.get('/', (req, res) => {
@@ -64,7 +76,7 @@ app.post('/portalDocuments', validatePortalDocument, catchAsyncError(async (req,
 
 // Showing individual portal document
 app.get('/portalDocuments/:id', catchAsyncError(async (req, res) => {
-    const portalDocument = await PortalModel.findById(req.params.id);
+    const portalDocument = await PortalModel.findById(req.params.id).populate('reviews');
     res.render('portalDocuments/show', { portalDocument })
 }))
 
@@ -86,6 +98,24 @@ app.delete('/portalDocuments/:id', catchAsyncError(async (req, res) => {
     const { id } = req.params;
     await PortalModel.findByIdAndDelete(id);
     res.redirect('/portalDocuments');
+}))
+
+// Add reviews
+app.post('/portalDocuments/:id/reviews', validateReview, catchAsyncError(async (req, res) => {
+    const portalDocument = await PortalModel.findById(req.params.id);
+    const review = new ReviewModel(req.body.review);
+    portalDocument.reviews.push(review);
+    await review.save();
+    await portalDocument.save();
+    res.redirect(`/portalDocuments/${portalDocument._id}`);
+}))
+
+// Dekete reviews
+app.delete('/portalDocuments/:id/reviews/:reviewId', catchAsyncError(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await PortalModel.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await ReviewModel.findByIdAndDelete(reviewId);
+    res.redirect(`/portalDocuments/${id}`);
 }))
 
 // Add the basic 404 error for invalid url requests by using the ExpressError class
