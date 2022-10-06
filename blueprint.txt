@@ -51,3 +51,11 @@ PART ONE: SETTING UP CRUD OPERATIONS
 25. Displaying reviews
 26. Deleting reviews
 27. DELETE Middleware for a whole portal document and its dependencies
+
+	PART FIVE: ROUTES AND FLASH
+	---------
+28. Portal document routes
+29.	Review routes
+30. Serving static Assets
+31. Configuring session
+32. Setting up flash

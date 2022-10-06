@@ -1,0 +1,1 @@
+alert('Greetings From The Past, You are here to learn \n Good luck on your quest for knowledge! ')
