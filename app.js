@@ -8,8 +8,14 @@ const ExpressError = require('./utils/expressError');
 const portalDocRouter = require('./routes/portalDocumentsRouter');
 const reviewsRouter = require('./routes/reviewsRouter');
 const session = require('express-session');
+const flash = require('connect-flash')
+const passport = require('passport');
+const localPassport = require('passport-local');
+const UserModel = require('./models/userModel');
+const userRouter = require('./routes/userRouter');
 
 
+// Establishing databse connection
 mongoose.connect('mongodb://localhost:27017/meaning-of-meaning');
 
 const db = mongoose.connection;
@@ -18,6 +24,7 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
+// Establish sessions
 const sessionConfig = {
     secret: 'ibanga',
     resave: false,
@@ -30,22 +37,42 @@ const sessionConfig = {
     }
 };
 
+
 const app = express();
 
+// Configuration of the express app
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', pathFinder.join(__dirname, 'views'));
 
-// Parsing the new (portal document) input
+// app midlewares 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use('/portalDocuments', portalDocRouter);
-app.use('/portalDocuments/:id/reviews', reviewsRouter);
+
 app.use(express.static(pathFinder.join(__dirname, 'public')));
 app.use(session(sessionConfig));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localPassport(UserModel.authenticate()));
+passport.serializeUser(UserModel.serializeUser());          // Getting a user in a session
+passport.deserializeUser(UserModel.deserializeUser());      // Getting a user out of a session
+
+app.use((req, res, next) => {
+    console.log(req.session);
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('successMessage');
+    res.locals.error = req.flash('errorMessage');
+    next();
+})
 
 
 
+
+app.use('/', userRouter);
+app.use('/portalDocuments', portalDocRouter);
+app.use('/portalDocuments/:id/reviews', reviewsRouter);
 
 
 // get and respond to the requests from the homepage

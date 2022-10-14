@@ -28,6 +28,7 @@ router.post('/', validateReview, catchAsyncError(async (req, res) => {
     portalDocument.reviews.push(review);
     await review.save();
     await portalDocument.save();
+    req.flash('successMessage', 'Created a new review');
     res.redirect(`/portalDocuments/${portalDocument._id}`);
 }))
 
@@ -36,6 +37,7 @@ router.delete('/:reviewId', catchAsyncError(async (req, res) => {
     const { id, reviewId } = req.params;
     await PortalModel.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await ReviewModel.findByIdAndDelete(reviewId);
+    req.flash('successMessage', 'Succesffully Deleted the review');
     res.redirect(`/portalDocuments/${id}`);
 }))
 
