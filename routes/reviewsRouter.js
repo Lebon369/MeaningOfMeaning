@@ -6,25 +6,14 @@ const PortalModel = require('../models/portalModel'); // For handling PUT, PATCH
 const ReviewModel = require('../models/reviewModel')
 const { reviewJoiSchema } = require('../joiSchemas');
 const { model } = require('mongoose');
-
-
-
-// Creating validation for reviews
-const validateReview = (req, res, next) => {
-    const { error } = reviewJoiSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
+const { validateReview, isLoggedIn, isReviewPoster } = require('../middleware')
 
 
 // Post a reviews
-router.post('/', validateReview, catchAsyncError(async (req, res) => {
+router.post('/', validateReview, isLoggedIn, catchAsyncError(async (req, res) => {
     const portalDocument = await PortalModel.findById(req.params.id);
     const review = new ReviewModel(req.body.review);
+    review.poster = req.user._id;
     portalDocument.reviews.push(review);
     await review.save();
     await portalDocument.save();
@@ -33,7 +22,7 @@ router.post('/', validateReview, catchAsyncError(async (req, res) => {
 }))
 
 // Delete reviews
-router.delete('/:reviewId', catchAsyncError(async (req, res) => {
+router.delete('/:reviewId', isLoggedIn, isReviewPoster, catchAsyncError(async (req, res) => {
     const { id, reviewId } = req.params;
     await PortalModel.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await ReviewModel.findByIdAndDelete(reviewId);

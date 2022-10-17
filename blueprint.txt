@@ -59,3 +59,18 @@ PART ONE: SETTING UP CRUD OPERATIONS
 30. Serving static Assets
 31. Configuring session
 32. Setting up flash
+
+	PART SIX: AUTHENTICATION
+	---------
+33. Installing and configuring Passport
+34. Register and Login routes
+35. Adding Logout Middleware
+36. Adding returnTo Helper
+
+	PART SEVEN: AUTHORIZATION
+	-----------
+37. Adding the Portal document's owner i.e the user that posted it
+38. Showing and hiding EDIT and DELETE buttons
+39. Adding portal document's permissions
+40. Authorization middlewares
+41. Reviews DELETE authorization

@@ -11,6 +11,11 @@ const PortalSchema = new Schema({
     pages: Number,
     title: String,
     year: String,
+    //poster is the user that created the post. Basically she/he owns it
+    poster: {
+        type: Schema.Types.ObjectId,
+        ref: 'UserModel'
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,

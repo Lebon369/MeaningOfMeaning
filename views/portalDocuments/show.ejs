@@ -7,69 +7,85 @@
                     <h5 class="card-title">
                         <%= portalDocument.title%>
                     </h5>
-
                 </div>
 
                 <ul class="list-group list-group-flush">
 
                     <li class="list-group-item text-muted">
-                        <small class="text-muted">by:</small>
+                        <small class="text-muted"> Author:</small>
                         <%= portalDocument.author%>
                     </li>
                     <li class="list-group-item text-muted">
+                        <small class="text-muted"> Year:</small>
                         <%= portalDocument.year%>
                     </li>
+                    <li class="list-group-item text-muted">
+                        <small class="text-muted"> Pages:</small>
+                        <%= portalDocument.pages%>
+                    </li>
+                    <li class="list-group-item text-muted">
+                        <small class="text-muted"> Posted by:</small>
+                        <%= portalDocument.poster.username%>
+                    </li>
+
                 </ul>
-                <div class="card-body">
-                    <a class="card-link btn btn-info" href="/portalDocuments/<%=portalDocument._id%>/edit">Edit</a>
-                    <form class="d-inline" action="/portalDocuments/<%=portalDocument._id%>?_method=DELETE"
-                        method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-                <div class="card-footer text-muted">
-                    3 days ago
-                </div>
+                <% if(currentUser && portalDocument.poster.equals(currentUser._id)) {%>
+                    <div class="card-body">
+                        <a class="card-link btn btn-info" href="/portalDocuments/<%=portalDocument._id%>/edit">Edit</a>
+                        <form class="d-inline" action="/portalDocuments/<%=portalDocument._id%>?_method=DELETE"
+                            method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
+
             </div>
         </div>
         <div class="col-6">
-            <h5>Leave a Review</h5>
-            <form action="/portalDocuments/<%=portalDocument._id%>/reviews" method="POST" class="mb-3 needsValidation"
-                novalidate>
-                <div class="mb-3">
-                    <label class="form-label" for="rating">Rating</label>
-                    <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="body">Review</label>
-                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <button class="btn btn-success">Submit</button>
-            </form>
-            <% for(let review of portalDocument.reviews) { %>
-                <div class="card mb-3 ">
-                    <div class="card-body">
-                        <section>
-                            <h5 class="card-title">
-                                Rating: <%= review.rating %>
-                            </h5>
-                        </section>
-                        <section class="card-text">
-                            <section>
-                                <h5>Review:</h5>
-                            </section>
-                            <%= review.body %>
-                        </section>
-                        <form action="/portalDocuments/<%=portalDocument._id%>/reviews/<%=review._id%>?_method=DELETE"
-                            method="POST">
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </form>
-                    </div>
-                </div>
-                <% } %>
+            <! If you're looged in, then you can leave a review>
+                <% if(currentUser){ %>
+                    <h5>Leave a Review</h5>
+                    <form action="/portalDocuments/<%=portalDocument._id%>/reviews" method="POST"
+                        class="mb-3 needsValidation" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="rating">Rating</label>
+                            <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="body">Review</label>
+                            <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
+                                required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <button class="btn btn-success">Submit</button>
+                    </form>
+                    <% } %>
+                        <% for(let review of portalDocument.reviews) { %>
+                            <div class="card mb-3 ">
+                                <div class="card-body">
+                                    <section>
+                                        <h5 class="card-title">
+                                            Rating: <%= review.rating %>
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">By: <%= review.poster.username %>
+                                        </h6>
+
+                                    </section>
+                                    <section class="card-text">
+                                        <%= review.body %>
+                                    </section>
+                                    <% if(currentUser && review.poster.equals(currentUser._id)) {%>
+                                        <form
+                                            action="/portalDocuments/<%=portalDocument._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                            method="POST">
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                            </div>
+                            <% } %>
         </div>
 
     </div>

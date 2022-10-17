@@ -27,6 +27,7 @@ const seedDB = async () => {
         portalDocument.country = book.country;
         portalDocument.language = book.language;
         portalDocument.pages = book.pages;
+        portalDocument.poster = '6348c7e6e3f8e83282778801';
 
         // setting up image generator from source.unsplash.com
         portalDocument.imageLink = 'https://source.unsplash.com/collection/1971015';
