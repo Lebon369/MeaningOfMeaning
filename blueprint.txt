@@ -1,8 +1,11 @@
-portal: 
+	STRUCTURE: MODEL-VIEW-CONTROLLER (MVC)
+	*******************************
+
+Portal: 
 	A post about something, it is a portal to the past. You can also call it an archive
 
-PART ONE: SETTING UP CRUD OPERATIONS
---------
+	PART ONE: SETTING UP CRUD OPERATIONS
+	--------
 
 1. Creating the basic Express App
 	1.1 Establishing the connection
@@ -14,13 +17,13 @@ PART ONE: SETTING UP CRUD OPERATIONS
 5. Portal show
 	5.1 create the show page
 	5.2 Make each portalDocument from index.ejs a link to the show.ejs page by usind unique _id
-6. Portal NEW and CREATE
+6. Portal NEW form and CREATE route
 	6.1 Creating the form that create and add a new portal document
 	6.1.1 Creating the 'NEW' form as a GET request
 	6.1.2 Creating the 'CREATE' route as a POST request
-7. portal EDIT and UPDATE
+7. Portal EDIT and UPDATE routeS
 	7.1 Using method-override to update a portal document
-8. Portal DELETE
+8. Portal DELETE route
 	8.1 Using method-override to delete a portal document
 
 	PART TWO: BASIC STYLES
@@ -74,3 +77,11 @@ PART ONE: SETTING UP CRUD OPERATIONS
 39. Adding portal document's permissions
 40. Authorization middlewares
 41. Reviews DELETE authorization
+
+	PART EIGHT: CONTROLLERS
+	-----------
+42. Portal Document controllers 
+43. Review controllers
+44. User controllers
+45. Restructuring the routers path with router.route() 
+46. Styling the review document with star rating system
